@@ -9,16 +9,19 @@ def get_bollinger_bands(rm, rstd):
 
 
 def test_run():
-    df = pd.read_csv('../data/20140905_SH600018.csv', index_col=['Time'], parse_dates=True, infer_datetime_format=True)
+    df = pd.read_csv('../data/20150518_SZ300276.csv', index_col=['Time'], parse_dates=True, infer_datetime_format=True)
     data = df[['Close']]
     rm_data = data.rolling(window=20).mean()
     rstd_data = data.rolling(window=20).std()
+    diff_data = data.diff()
     upper_band, lower_band = get_bollinger_bands(rm_data, rstd_data)
 
     ax = data.plot(title="20140905_SH600018", label='Price')
     rm_data.plot(label="rolling mean", ax=ax)
-    upper_band.plot(label="upper band", ax=ax)
-    lower_band.plot(label="lower band", ax=ax)
+    # diff_data.plot(label="diff")
+    rstd_data.plot(label="rolling std")
+    # upper_band.plot(label="upper band", ax=ax)
+    # lower_band.plot(label="lower band", ax=ax)
 
     ax.set_xlabel("Time")
     ax.set_ylabel("Price, (RMB)")
