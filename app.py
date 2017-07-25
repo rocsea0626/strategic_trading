@@ -1,4 +1,4 @@
-import spike_rise_little as srl
+import spike_rise as srl
 
 def run():
     is_rising_spike = srl.run(threshold=0.07, show_plot=True)
